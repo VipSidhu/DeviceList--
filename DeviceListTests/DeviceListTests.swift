@@ -11,7 +11,7 @@ import XCTest
 class DeviceListTests: XCTestCase {
 
     override func setUpWithError() throws {
-        // Put setup code here. This method is called before the invocation of each test method in the class.
+        getFilterValue()
     }
 
     override func tearDownWithError() throws {
@@ -29,5 +29,29 @@ class DeviceListTests: XCTestCase {
             // Put the code you want to measure the time of here.
         }
     }
+    
+    func getFilterValue(){
+            struct DeviceObj {
+                var Id = Int(),
+                    type = String(),
+                    Price = Int(),
+                    Currency = String(),
+                    isFavorite = Bool(),
+                    imageUrl = String(),
+                    Title = String(),
+                    Description = String(),
+                    review = Double(),
+                    size = String(),
+                    OS = String()
+                    
+            }
+            var DeviceArr = [DeviceObj]()
+            DeviceArr.append(DeviceObj(Id: 01, type: "Nokia X2", Price: 10, Currency: "USD", isFavorite: true, imageUrl: "", Title: "", Description: "Available", review: 4.0, size: "160 * 160", OS: "Android"))
+            let filter = DeviceArr.filter({
+                $0.type == "Nokia X2" || $0.OS == "Android"
+                
+            })
+            XCTAssertEqual(filter.first?.type, DeviceArr[0].type)
+        }
 
 }
